@@ -87,6 +87,130 @@ Spring finds every bean implementing the interface and injects them as a list. Y
 
 ---
 
+# When to use each — a decision guide
+
+The tier order above tells you what to **learn** first. This section tells you what to **reach for** while building.
+
+## 1. Start from the symptom, not the pattern
+
+You should never start with "which pattern should I use here?" You start with something concrete you are about to write, or something already in the file that hurts. Find the row that matches:
+
+| What you're writing / what you see | Reach for | Guide |
+|---|---|---|
+| An `if`/`switch` over a type code, **3+ branches**, that will keep growing | **Strategy** | [→](STRATEGY_PATTERN.md) |
+| A third-party SDK type appearing in your service or controller signature | **Adapter** | [→](ADAPTER_PATTERN.md) |
+| A vendor API whose money/status/naming conventions don't match your domain | **Adapter** | [→](ADAPTER_PATTERN.md) |
+| A controller with **4+ injected dependencies** | **Facade** | [→](FACADE_PATTERN.md) |
+| A service method calling **5+ collaborators** in a fixed sequence | **Facade** | [→](FACADE_PATTERN.md) |
+| A flow that charges a card *and* writes to the DB, and step 6 might fail | **Facade + compensation** | [→](FACADE_PATTERN.md#the-advanced-part-compensation) |
+| A sequence of checks where any one can reject the request | **Chain of Responsibility** | [→](CHAIN_OF_RESPONSIBILITY_PATTERN.md) |
+| Cross-cutting request concerns: request IDs, auth, maintenance mode | **Chain** (a servlet `Filter`) | [→](CHAIN_OF_RESPONSIBILITY_PATTERN.md) |
+| Two+ classes with the **same step sequence**, differing in 1–2 steps | **Template Method** | [→](TEMPLATE_METHOD_PATTERN.md) |
+| A constructor with **5+ parameters**, or several optional ones | **Builder** | [→](BUILDER_PATTERN.md) |
+| An object that must never exist in an invalid state | **Builder** with validating `build()` | [→](BUILDER_PATTERN.md) |
+| The same retry / logging / metrics wrapper needed around several implementations | **Decorator** — or AOP first | [→](DECORATOR_PATTERN.md) |
+| Needing a **fresh instance** per call inside a singleton | `ObjectProvider<T>` | [→](FACTORY_PATTERN.md) |
+| Choosing an implementation per environment or config flag | `@ConditionalOnProperty` / `@Profile` — **not** a factory | [→](FACTORY_PATTERN.md) |
+| `new ConcreteThing()` inside a service class | **Inject it** (DIP) | [→](SOLID_PRINCIPLES.md#d--dependency-inversion-principle) |
+| A method throwing `UnsupportedOperationException` to satisfy an interface | **Split the interface** (ISP) | [→](SOLID_PRINCIPLES.md#i--interface-segregation-principle) |
+| One class that validates *and* saves *and* emails *and* reports | **Split it** (SRP) | [→](SOLID_PRINCIPLES.md#s--single-responsibility-principle) |
+
+## 2. Where each one lives in a Spring Boot app
+
+Building a feature outside-in, this is roughly where each pattern belongs:
+
+```
+┌─ Controller / API ─────────────────────────────────────────────┐
+│  Facade      keep the controller to: map → call once → map     │
+│  Chain       servlet Filters / HandlerInterceptor              │
+│  Builder     assembling response DTOs (or just use records)    │
+└────────────────────────────────────────────────────────────────┘
+┌─ Application / Service ────────────────────────────────────────┐
+│  Facade      orchestration, transactions, compensation         │
+│  Strategy    branching on a business type                      │
+│  Chain       validation pipelines                              │
+│  Template    a shared workflow skeleton across variants        │
+└────────────────────────────────────────────────────────────────┘
+┌─ Integration / Infrastructure  ← the boundary ─────────────────┐
+│  Adapter     ALWAYS, for every third-party SDK or API          │
+│  Decorator   retry / metrics / logging around the adapter      │
+│  Factory     the registry that selects among adapters          │
+└────────────────────────────────────────────────────────────────┘
+┌─ Domain ───────────────────────────────────────────────────────┐
+│  Builder     immutable value objects with invariants           │
+│  Strategy    pluggable business rules (pricing, discounts)     │
+│  (mostly)    no patterns — plain records and methods           │
+└────────────────────────────────────────────────────────────────┘
+```
+
+**The density is deliberate.** Patterns cluster at the **boundary** (where other people's code meets yours) and at **orchestration** (where many things must happen in order). Your domain layer should be the *least* patterned part of the app — if it isn't, the patterns are probably compensating for a weak model.
+
+## 3. When in the project to introduce them
+
+| Phase | Adopt | Leave alone |
+|---|---|---|
+| **First version of a feature** | Constructor injection (DIP), one responsibility per class (SRP) — these are free and cost nothing to keep | Everything else. Write the straightforward thing. |
+| **Second variant arrives** | Adapter — **immediately**, if a third party is involved | Strategy — wait for the third branch |
+| **Third variant arrives** | Strategy, Template Method, Factory registry | — |
+| **Feature grows** | Facade (controller bloat), Chain (validation grows), Decorator (repeated wrapping) | — |
+| **Going to production** | Compensation in the facade, retry/timeout at the boundary | — |
+
+### The rule of three
+
+> Don't extract a pattern on the **first** occurrence. Extract on the **third**.
+
+Two implementations of an interface is usually a coincidence. Three is a pattern. Extracting too early means you abstract along the wrong axis — and a wrong abstraction is harder to remove than duplication.
+
+### The exceptions — adopt these on day one
+
+Three things should never wait for a third occurrence, because the cost of retrofitting them is far higher than the cost of having them:
+
+1. **Adapter at any third-party boundary.** The moment a vendor type crosses into your service layer, the cost of removing it later grows with every file that touches it. One class, written on day one, is cheap insurance.
+2. **Constructor injection against interfaces (DIP).** Retrofitting testability into a codebase full of `new` is a multi-week project. Doing it from the start is free.
+3. **Validation in the constructor or `build()`.** An object that can exist in an invalid state spreads null checks through every consumer. Guard it at the single point of construction.
+
+## 4. Patterns that arrive together
+
+Real features rarely use one pattern. A typical payment integration — which is exactly what the adapter and decorator modules in this repo demonstrate — converges on this stack:
+
+```
+Checkout flow
+  └── Facade                  orchestrates + compensates on failure
+        └── Factory/Registry  selects the provider           ← List<T> injection
+              └── Decorator   retry → metrics → logging
+                    └── Adapter   Stripe / ABA / Wing
+                          └── vendor SDK
+```
+
+Each layer does one thing and none of them knows about the others. Recognising that this is **one design**, not six patterns bolted together, is the point at which the material has landed.
+
+Other common pairings:
+
+- **Strategy + Template Method** — a registry selects the processor; each processor is a template. See [`template-method-pattern-class-samples/spring-boot`](TEMPLATE_METHOD_PATTERN.md#template-method-meets-strategy).
+- **Facade + Chain** — the facade orchestrates; the first step is a validation chain.
+- **Adapter + Decorator** — the adapter normalises the vendor; decorators add resilience.
+
+## 5. When the answer is "no pattern"
+
+This is the section most pattern material omits, and it is the one that keeps codebases readable.
+
+| Situation | Do this instead |
+|---|---|
+| Two branches that haven't changed in two years | Leave the `if` |
+| An interface with exactly one implementation | Delete the interface |
+| "Variants" that differ only by a rate, label or threshold | A `Map` or a config property — not classes |
+| The implementation is fixed per deployment | `@Profile` / `@ConditionalOnProperty`, one bean |
+| Field-level validation (`@NotBlank`, `@Email`, ranges) | Bean Validation — not a chain |
+| Transactions, caching, async, retry on **your own** beans | `@Transactional`, `@Cacheable`, `@Async`, `@Retryable` — not hand-written decorators |
+| A value object with 3–4 required fields | A `record` — not a builder |
+| You can't name the axis of variation | Stop. You don't have a pattern yet, you have duplication. Wait. |
+
+**The real failure mode of pattern courses is over-application.** Every pattern here trades simplicity for flexibility you may never need. A codebase with an `AbstractNotificationStrategyFactoryProvider` and one implementation is worse — harder to read, harder to change — than the if-chain it replaced.
+
+If you can't articulate *what is likely to change*, the pattern is premature.
+
+---
+
 ## Quick reference — telling them apart
 
 Most confusion between these patterns comes from the fact that several share a mechanism. The intent is what differs:
