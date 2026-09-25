@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: builder-pattern-spring-boot
+server:
+  port: 8080

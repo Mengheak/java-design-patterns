@@ -1,0 +1,21 @@
+{"info":{"name":"Template Method Pattern Demo","description":"Spring Boot API demo for Template Method Pattern.","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},"item":[{"name":"Process ABA Payment","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/payments","host":["{{baseUrl}}"],"path":["api","payments"]},"body":{"mode":"raw","raw":"{
+  "method": "ABA",
+  "accountNo": "ABA-001",
+  "amount": 100
+}"}}},{"name":"Process ACLEDA Payment","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/payments","host":["{{baseUrl}}"],"path":["api","payments"]},"body":{"mode":"raw","raw":"{
+  "method": "ACLEDA",
+  "accountNo": "ACLEDA-001",
+  "amount": 150
+}"}}},{"name":"Process KHQR Payment With SMS Hook","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/payments","host":["{{baseUrl}}"],"path":["api","payments"]},"body":{"mode":"raw","raw":"{
+  "method": "KHQR",
+  "accountNo": "KHQR-001",
+  "amount": 25
+}"}}},{"name":"Unsupported Payment Method","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/payments","host":["{{baseUrl}}"],"path":["api","payments"]},"body":{"mode":"raw","raw":"{
+  "method": "WING",
+  "accountNo": "WING-001",
+  "amount": 50
+}"}}},{"name":"Invalid Payment Amount","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/payments","host":["{{baseUrl}}"],"path":["api","payments"]},"body":{"mode":"raw","raw":"{
+  "method": "ABA",
+  "accountNo": "ABA-001",
+  "amount": 0
+}"}}}]}

@@ -1,0 +1,12 @@
+{
+  "format_issues": [
+    "chain-pattern-plain-java/src/main/java/com/pisethjava/chain/validation/ValidationError.java",
+    "chain-pattern-plain-java/src/main/java/com/pisethjava/chain/validation/RegistrationRequest.java",
+    "chain-pattern-spring-boot/src/main/java/com/pisethjava/chain/room/api/SubmitRoomResponse.java"
+  ],
+  "compile_returncode": 0,
+  "compile_stderr": "",
+  "run_returncode": 0,
+  "run_output": "\n=== PAYMENT PIPELINE ===\n1. Validation passed\n2. Authentication passed\n3. Authorization passed\n4. Rate limit passed\n5. Fraud check passed\n6. Process payment: 150.00 USD\nProcessed = true\n\n=== STOP CHAIN ON FAILURE ===\n1. Validation passed\n2. Authentication passed\nChain stopped: PAYMENT_CREATE permission is required\nProcessed = false\n\n=== FIRST MATCHING HANDLER ===\nApproved by Manager: Laptop purchase -> 1500\nApproved by Director: Office renovation -> 7000\n\n=== DYNAMIC CHAIN ===\n1. Validation passed\n2. Authentication passed\n3. Authorization passed\n6. Process payment: 99.00 USD\n\n=== HOMEWORK ANSWER: ROOM PUBLISHING ===\nRoom exists\nOwnership passed\nProperty approved\nSubscription active\nRoom information complete\nMedia validation passed\nCreate moderation case\nRoom submitted: d1d03b34-2a61-46b8-8755-a1a9db51be2a\n\n=== COLLECT ALL VALIDATION ERRORS ===\nemail: Email is invalid\npassword: Password must contain at least 8 characters\nphone: Phone is required\n",
+  "run_stderr": ""
+}

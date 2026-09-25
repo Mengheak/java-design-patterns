@@ -1,0 +1,107 @@
+{
+  "info": {
+    "name": "Adapter Pattern Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Providers",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments/providers",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "payments",
+            "providers"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Pay with ABA",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"provider\": \"ABA\",\n  \"account\": \"account-token\",\n  \"amount\": 125.5,\n  \"currency\": \"USD\",\n  \"reference\": \"ORDER-ABA-1001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "payments"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Pay with STRIPE",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"provider\": \"STRIPE\",\n  \"account\": \"account-token\",\n  \"amount\": 125.5,\n  \"currency\": \"USD\",\n  \"reference\": \"ORDER-STRIPE-1001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "payments"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Pay with WING",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"provider\": \"WING\",\n  \"account\": \"012345678\",\n  \"amount\": 125.5,\n  \"currency\": \"USD\",\n  \"reference\": \"ORDER-WING-1001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "payments"
+          ]
+        }
+      }
+    }
+  ]
+}

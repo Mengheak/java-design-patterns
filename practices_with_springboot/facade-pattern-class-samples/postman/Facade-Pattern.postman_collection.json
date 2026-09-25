@@ -1,0 +1,60 @@
+{
+  "info": {
+    "name": "Facade Pattern Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Booking",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"guestId\": \"GUEST-1\",\n  \"roomId\": \"ROOM-101\",\n  \"checkIn\": \"2026-09-10\",\n  \"checkOut\": \"2026-09-13\",\n  \"paymentToken\": \"TOKEN-123\"\n}"
+        },
+        "url": {
+          "raw": "{{bookingBaseUrl}}/api/v1/bookings",
+          "host": [
+            "{{bookingBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "bookings"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Submit Room",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Owner-Id",
+            "value": "OWNER-1"
+          }
+        ],
+        "url": {
+          "raw": "{{webfluxBaseUrl}}/api/v1/rooms/ROOM-1/submit",
+          "host": [
+            "{{webfluxBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "rooms",
+            "ROOM-1",
+            "submit"
+          ]
+        }
+      }
+    }
+  ]
+}

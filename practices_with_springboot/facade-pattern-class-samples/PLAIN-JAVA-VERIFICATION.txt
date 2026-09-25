@@ -1,0 +1,45 @@
+Compilation: SUCCESS
+Demo execution: SUCCESS
+
+=== BEFORE FACADE ===
+1. Validate customer: CUSTOMER-1
+2. Validate order: ORDER-1
+3. Check inventory
+4. Reserve products
+ABA adapter: process 100.00
+5. Payment accepted
+6. Create shipment
+7. Generate invoice
+8. Notify CUSTOMER-1
+9. Audit ORDER-1
+PlaceOrderResult[orderNumber=ORDER-1, paymentTransactionId=ABA-ORDER-1, shipmentNumber=SHIP-ORDER-1, invoiceNumber=INV-ORDER-1, status=ORDER_CREATED]
+=== AFTER FACADE ===
+1. Validate customer: CUSTOMER-1
+2. Validate order: ORDER-1
+3. Check inventory
+4. Reserve products
+ABA adapter: process 100.00
+5. Payment accepted
+6. Create shipment
+7. Generate invoice
+8. Notify CUSTOMER-1
+9. Audit ORDER-1
+PlaceOrderResult[orderNumber=ORDER-1, paymentTransactionId=ABA-ORDER-1, shipmentNumber=SHIP-ORDER-1, invoiceNumber=INV-ORDER-1, status=ORDER_CREATED]
+Validate guest: GUEST-1
+Check room: ROOM-101
+Price: 150.00
+Reserve: RES-ROOM-101
+Pay: PAY-80003545
+Create: BOOK-ROOM-101
+Notify GUEST-1 for BOOK-ROOM-101
+Audit BOOK-ROOM-101
+Award points to GUEST-1
+BookingResult[bookingId=BOOK-ROOM-101, reservationId=RES-ROOM-101, paymentTransactionId=PAY-80003545, totalPrice=150.00, status=CONFIRMED]
+Validate guest: GUEST-1
+Check room: ROOM-101
+Price: 150.00
+Reserve: RES-ROOM-101
+Pay: PAY-80003545
+COMPENSATE refund PAY-80003545
+COMPENSATE release RES-ROOM-101
+Expected failure: Simulated booking failure

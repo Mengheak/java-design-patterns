@@ -1,0 +1,68 @@
+{
+  "info": {
+    "_postman_id": "chain-of-responsibility-demo-2026",
+    "name": "Chain of Responsibility Pattern Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Spring Boot - Submit Room",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ownerId\": \"OWNER-001\"\n}"
+        },
+        "url": {
+          "raw": "{{mvcBaseUrl}}/api/v1/rooms/ROOM-001/submit",
+          "host": [
+            "{{mvcBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "rooms",
+            "ROOM-001",
+            "submit"
+          ]
+        }
+      }
+    },
+    {
+      "name": "WebFlux - Submit Room",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Owner-Id",
+            "value": "OWNER-001"
+          },
+          {
+            "key": "X-API-Key",
+            "value": "demo-key"
+          }
+        ],
+        "url": {
+          "raw": "{{webfluxBaseUrl}}/api/v1/reactive/rooms/ROOM-001/submit",
+          "host": [
+            "{{webfluxBaseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "reactive",
+            "rooms",
+            "ROOM-001",
+            "submit"
+          ]
+        }
+      }
+    }
+  ]
+}

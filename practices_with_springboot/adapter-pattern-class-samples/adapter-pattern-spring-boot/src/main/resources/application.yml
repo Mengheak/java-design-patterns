@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: adapter-pattern-spring-boot
+server:
+  port: 8080

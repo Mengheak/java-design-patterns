@@ -1,0 +1,58 @@
+
+=== 1. INHERITANCE EXPLOSION ===
+[LOG] before
+EMAIL: Booking confirmed
+[LOG] after
+[LOG] before
+EMAIL: ENCRYPTED[Booking confirmed]
+[LOG] after
+Adding Retry, Metrics, Audit, and RateLimit would create many subclass combinations.
+
+=== 2. BASIC DECORATOR CHAIN ===
+[LOG] Sending notification
+EMAIL: ENCRYPTED[Your booking is confirmed.]
+[LOG] Notification sent
+[METRICS] duration=334979ns
+
+=== 3. RETRY DECORATOR ===
+[RETRY] attempt=1
+[RETRY] attempt=2
+[RETRY] attempt=3
+UNSTABLE SENDER SUCCESS: Retry demo
+
+=== 4. DECORATOR ORDER ===
+
+Logging outside encryption:
+[LOG] Sending notification
+EMAIL: ENCRYPTED[Sensitive message]
+[LOG] Notification sent
+
+Encryption outside logging:
+[LOG] Sending notification
+EMAIL: ENCRYPTED[Sensitive message]
+[LOG] Notification sent
+
+=== 5. JAVA I/O DECORATOR ===
+Read first byte through decorated InputStream: 74
+
+=== 6. ADAPTER + DECORATOR ===
+[RETRY] Payment attempt 1
+[LOG] Payment started: ORDER-1001
+ABA SDK: account=001-123456-9, amount=125.50 USD, reference=ORDER-1001
+[LOG] Payment finished: ABA-ORDER-1001
+[METRICS] payment.duration=16197290ns
+Result: PaymentResult[transactionId=ABA-ORDER-1001, successful=true]
+
+=== 7. STORAGE HOMEWORK ANSWER ===
+[LOG] Upload: lesson.txt, bytes=165
+[COMPRESS] original=165 bytes, compressed=97 bytes
+[METRICS] upload.duration=1429827ns
+[LOG] Download: lesson.txt
+[METRICS] download.duration=628896ns
+Local content restored: true
+Room Cambodia Decorator Pattern Demo. This repeated sentence improves compression. Room Cambodia Decorator Pattern Demo. This repeated sentence improves compression.
+
+Decorating an Adapter:
+[LOG] Upload: s3-demo.txt, bytes=165
+[LOG] Download: s3-demo.txt
+S3 content restored: true

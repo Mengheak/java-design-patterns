@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: decorator-pattern-spring-boot
+
+server:
+  port: 8080
