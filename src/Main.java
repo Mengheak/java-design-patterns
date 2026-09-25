@@ -6,6 +6,10 @@ import dependency_injection.AiModel;
 import dependency_injection.AnswerService;
 import dependency_injection.FakeAiModel;
 import factory.AiModelFactory;
+import observer.AnswerCountingObserver;
+import observer.AnswerLengthObserver;
+import observer.AnswerLoggingObserver;
+import observer.AnswerObserver;
 import strategy.ConcisePromptStrategy;
 import strategy.TeachingPromptStrategy;
 
@@ -63,5 +67,23 @@ public class Main {
         System.out.println(
                 answerService1.answer("What is a factory?")
         );
+
+        //Observer
+        System.out.println("===============Observer Pattern===============");
+        AnswerService answerService3 = new AnswerService(factory.create("fake"), new TeachingPromptStrategy());
+
+        AnswerObserver logger = new AnswerLoggingObserver();
+        AnswerObserver counter = new AnswerCountingObserver();
+        AnswerObserver lengthObserver = new AnswerLengthObserver();
+
+        answerService3.addObserver(logger);
+        answerService3.addObserver(counter);
+        answerService3.addObserver(lengthObserver);
+
+        String answer = answerService3.answer("What is Observer?");
+        System.out.println(answer);
+        answerService3.removeObserver(logger);
+        answerService3.answer("What is Strategy?");
+
     }
 }
