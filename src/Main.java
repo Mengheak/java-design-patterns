@@ -1,5 +1,6 @@
 import adapter.VendorAiAdapter;
 import adapter.VendorAiClient;
+import builder.AiRequest;
 import chain_of_responsibility.BlankQuestionHandler;
 import chain_of_responsibility.QuestionHandler;
 import chain_of_responsibility.QuestionLengthHandler;
@@ -105,5 +106,26 @@ public class Main {
         } catch (IllegalArgumentException exception) {
             System.out.println("Rejected: " + exception.getMessage());
         }
+
+
+        //builder
+        System.out.println("===============Builder Pattern===============");
+        AiRequest customRequest = AiRequest.builder("What is the builder pattern?")
+                .temperature(0.2)
+                .maxTokens(300)
+                .build();
+        AiRequest defaultRequest = AiRequest.builder(
+                "What is dependency injection?"
+        ).build();
+
+        System.out.println("Custom request:");
+        System.out.println("Custom question= " +customRequest.getQuestion());
+        System.out.println("Custom temp= " +customRequest.getTemperature());
+        System.out.println("Custom max token= " +customRequest.getMaxTokens());
+
+        System.out.println("Default request:");
+        System.out.println("Default question= " + defaultRequest.getQuestion());
+        System.out.println("Default temp= " +defaultRequest.getTemperature());
+        System.out.println("Default max token= " +defaultRequest.getMaxTokens());
     }
 }
