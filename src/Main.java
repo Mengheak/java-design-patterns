@@ -18,6 +18,9 @@ import observer.AnswerLoggingObserver;
 import observer.AnswerObserver;
 import strategy.ConcisePromptStrategy;
 import strategy.TeachingPromptStrategy;
+import template_method.AnswerWorkflow;
+import template_method.ConciseAnswerWorkflow;
+import template_method.TeachingAnswerWorkflow;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -153,5 +156,17 @@ public class Main {
         } catch (IllegalArgumentException exception) {
             System.out.println("Rejected: " + exception.getMessage());
         }
+
+        //template method
+        System.out.println("===============Template method Pattern===============");
+        AiModel model2 = factory1.create("fake");
+        AnswerWorkflow teaching = new TeachingAnswerWorkflow(model2);
+        AnswerWorkflow concise =  new ConciseAnswerWorkflow(model2);
+
+        String question4 = "What is inheritance?";
+        System.out.println(teaching.answer(question4));
+        System.out.println();
+
+        System.out.println(concise.answer(question4));
     }
 }
