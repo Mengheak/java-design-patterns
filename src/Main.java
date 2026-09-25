@@ -4,6 +4,7 @@ import decorator.TimingAiModel;
 import dependency_injection.AiModel;
 import dependency_injection.AnswerService;
 import dependency_injection.FakeAiModel;
+import factory.AiModelFactory;
 import strategy.ConcisePromptStrategy;
 import strategy.TeachingPromptStrategy;
 
@@ -36,12 +37,25 @@ public class Main {
 
 
         //decorator
+        System.out.println("===============Decorator Pattern===============");
         AiModel originalModel = new FakeAiModel();
         AiModel timedModel  = new TimingAiModel(originalModel);
 
         AnswerService answerService = new AnswerService(timedModel, new TeachingPromptStrategy());
         System.out.println(
                 answerService.answer("What is the Decorator pattern?")
+        );
+
+
+        //factory
+        System.out.println("===============Factory Pattern===============");
+        AiModelFactory  factory = new AiModelFactory();
+        AiModel baseModel = factory.create("vendor");
+
+        AiModel timedModel1 = new TimingAiModel(baseModel);
+        AnswerService answerService1 = new AnswerService(timedModel1, new TeachingPromptStrategy());
+        System.out.println(
+                answerService1.answer("What is a factory?")
         );
     }
 }
