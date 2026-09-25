@@ -1,5 +1,9 @@
 import adapter.VendorAiAdapter;
 import adapter.VendorAiClient;
+import chain_of_responsibility.BlankQuestionHandler;
+import chain_of_responsibility.QuestionHandler;
+import chain_of_responsibility.QuestionLengthHandler;
+import chain_of_responsibility.QuestionMarkHandler;
 import decorator.LoggingAiModel;
 import decorator.TimingAiModel;
 import dependency_injection.AiModel;
@@ -85,5 +89,21 @@ public class Main {
         answerService3.removeObserver(logger);
         answerService3.answer("What is Strategy?");
 
+
+        //chain of responsibility
+        System.out.println("===============Chain of Responsibility Pattern===============");
+        QuestionHandler validation = new BlankQuestionHandler();
+
+        validation.setNext(new QuestionLengthHandler(200))
+                  .setNext(new QuestionMarkHandler());
+        String question2 = "What is Chain of Responsibility?";
+
+        try {
+            validation.handle(question2);
+            String answer2 = answerService3.answer(question2);
+            System.out.println(answer2);
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Rejected: " + exception.getMessage());
+        }
     }
 }
