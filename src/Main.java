@@ -1,3 +1,5 @@
+import adapter.VendorAiAdapter;
+import adapter.VendorAiClient;
 import dependency_injection.AiModel;
 import dependency_injection.AnswerService;
 import dependency_injection.FakeAiModel;
@@ -9,8 +11,9 @@ import strategy.TeachingPromptStrategy;
 public class Main {
     public static void main(String[] args) {
         //        the main idea is, you can use any ai model to perform the answer service
-        AiModel model = new FakeAiModel();
-
+        //        AiModel model = new FakeAiModel();
+        VendorAiClient client = new VendorAiClient();
+        AiModel model = new VendorAiAdapter(client);
 
 
         //        Strategy lets you switch between different ways of performing the same task. In an AI app,
