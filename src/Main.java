@@ -10,6 +10,7 @@ import decorator.TimingAiModel;
 import dependency_injection.AiModel;
 import dependency_injection.AnswerService;
 import dependency_injection.FakeAiModel;
+import facade.AiAssistantFacade;
 import factory.AiModelFactory;
 import observer.AnswerCountingObserver;
 import observer.AnswerLengthObserver;
@@ -127,5 +128,30 @@ public class Main {
         System.out.println("Default question= " + defaultRequest.getQuestion());
         System.out.println("Default temp= " +defaultRequest.getTemperature());
         System.out.println("Default max token= " +defaultRequest.getMaxTokens());
+
+
+        //facade
+        System.out.println("===============Facade Pattern===============");
+        QuestionHandler validation2 = new BlankQuestionHandler();
+        validation2.setNext(new QuestionLengthHandler(200));
+
+        AiModelFactory factory1 = new AiModelFactory();
+        AiModel model1 = factory1.create("fake");
+
+        AnswerService answerService4 = new AnswerService(
+                model,
+                new TeachingPromptStrategy()
+        );
+        answerService4.addObserver(new AnswerLoggingObserver());
+        AiAssistantFacade assistant = new AiAssistantFacade(
+                validation,
+                answerService4
+        );
+        try {
+            String answer4 = assistant.ask("What is the Facade pattern?");
+            System.out.println(answer4);
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Rejected: " + exception.getMessage());
+        }
     }
 }
