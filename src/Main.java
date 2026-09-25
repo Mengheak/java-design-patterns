@@ -1,5 +1,6 @@
 import adapter.VendorAiAdapter;
 import adapter.VendorAiClient;
+import decorator.LoggingAiModel;
 import decorator.TimingAiModel;
 import dependency_injection.AiModel;
 import dependency_injection.AnswerService;
@@ -40,10 +41,15 @@ public class Main {
         System.out.println("===============Decorator Pattern===============");
         AiModel originalModel = new FakeAiModel();
         AiModel timedModel  = new TimingAiModel(originalModel);
+        AiModel loggedModel  = new LoggingAiModel(originalModel);
 
         AnswerService answerService = new AnswerService(timedModel, new TeachingPromptStrategy());
         System.out.println(
                 answerService.answer("What is the Decorator pattern?")
+        );
+        AnswerService answerService2 = new AnswerService(loggedModel, new TeachingPromptStrategy());
+        System.out.println(
+                answerService2.answer("What is the Decorator pattern? (logged model)")
         );
 
 
