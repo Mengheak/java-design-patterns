@@ -1,7 +1,11 @@
 # Strategy Pattern
 
+**Local practice:** [PromptStrategy](src/strategy/PromptStrategy.java) has concise and teaching implementations selected when constructing `AnswerService`. Package: `strategy`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
 > **Tier 1 — read second, after [SOLID_PRINCIPLES.md](SOLID_PRINCIPLES.md).**
-> **Module:** `strategy-pattern-class-samples` · **Packages:** `com.pisethjavaschool.strategy_pattern_springboot.{bad,good}`
+> **Module:** `practices_with_springboot/strategy-pattern-class-samples` · **Packages:** `com.chheang.mengheak.strategy_pattern_springboot.{bad,good}`
 
 **The highest payoff-per-line pattern in this repository.** It is 23 files, it takes about ninety minutes, and it will change how you write Spring services permanently.
 
@@ -255,16 +259,16 @@ Be honest about this, because pattern courses rarely are:
 
 Strategy and Adapter look nearly identical in code — both are `List<T>` injection into a registry. **The difference is intent: Strategy chooses between behaviors you wrote; Adapter hides APIs you didn't.**
 
-Strategy and Factory are frequently confused because a factory usually returns a strategy. The `factory-pattern-class-samples/plain-java/lesson03_strategy` package is literally both at once.
+Strategy and Factory are frequently confused because a factory usually returns a strategy. The `practices_with_springboot/factory-pattern-class-samples/plain-java/lesson03_strategy` package is literally both at once.
 
 ---
 
 ## File map
 
 ```
-strategy-pattern-class-samples/
+practices_with_springboot/strategy-pattern-class-samples/
 ├── strategy-pattern-plan-java/            ← plain Java (note: "plan" is a typo in the repo)
-│   └── src/com/pisethjavaschool/
+│   └── src/com/chheang/mengheak/
 │       ├── bad/BadNotificationService.java
 │       ├── good/  NotificationStrategy, Email/Sms/Telegram/Slack, Factory, Service
 │       └── Main.java
@@ -283,7 +287,7 @@ Skip the plain-java module. Go straight to the Spring one — the `List<T>` inje
 ## How to run
 
 ```bash
-cd strategy-pattern-class-samples/strategy-pattern-springboot
+cd practices_with_springboot/strategy-pattern-class-samples/strategy-pattern-springboot
 mvn spring-boot:run
 ```
 

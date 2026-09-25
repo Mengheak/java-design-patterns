@@ -1,6 +1,10 @@
 # Decorator Pattern
 
-> **Tier 3** · **Module:** `decorator-pattern-class-samples` · **Packages:** `com.pisethjava.decorator.*`
+**Local practice:** [LoggingAiModel](src/decorator/LoggingAiModel.java) and [TimingAiModel](src/decorator/TimingAiModel.java) wrap the `AiModel` interface. Package: `decorator`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
+> **Tier 3** · **Module:** `practices_with_springboot/decorator-pattern-class-samples` · **Packages:** `com.chheang.mengheak.decorator.*`
 
 **Read the problem, understand the mechanism, then know that Spring AOP already does this for you.** `@Transactional`, `@Cacheable`, `@Async` and `@Retryable` are decorators generated at runtime. Hand-written decorators are for the cases AOP cannot express.
 
@@ -260,7 +264,7 @@ Run `JavaIoDecoratorDemo` — the `java.io` hierarchy is the clearest real-world
 ## File map
 
 ```
-decorator-pattern-class-samples/
+practices_with_springboot/decorator-pattern-class-samples/
 ├── decorator-pattern-plain-java/.../decorator/
 │   ├── demo/DecoratorCourseDemo.java       ← entry point; uncomment one demo
 │   ├── inheritance/       ← ⭐ READ FIRST — the class explosion
@@ -285,13 +289,13 @@ decorator-pattern-class-samples/
 ## How to run
 
 ```bash
-cd decorator-pattern-class-samples/decorator-pattern-plain-java && mvn clean package && java -jar target/decorator-pattern-plain-java-1.0.0.jar
+cd practices_with_springboot/decorator-pattern-class-samples/decorator-pattern-plain-java && mvn clean package && java -jar target/decorator-pattern-plain-java-1.0.0.jar
 ```
 
 Edit `DecoratorCourseDemo.java` to select a demo — `DecoratorOrderDemo` and `RetryDecoratorDemo` are the two worth running.
 
 ```bash
-cd decorator-pattern-class-samples/decorator-pattern-spring-boot && mvn spring-boot:run
+cd practices_with_springboot/decorator-pattern-class-samples/decorator-pattern-spring-boot && mvn spring-boot:run
 ```
 
 ```bash

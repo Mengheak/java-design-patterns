@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.pisethjava</groupId>
+    <groupId>com.chheang.mengheak</groupId>
     <artifactId>decorator-pattern-spring-boot</artifactId>
     <version>1.0.0</version>
 

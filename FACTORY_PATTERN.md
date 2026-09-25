@@ -1,7 +1,11 @@
 # Factory Pattern
 
+**Local practice:** [AiModelFactory](src/factory/AiModelFactory.java) creates a fake model or vendor adapter from the keys `fake` and `vendor`. Package: `factory`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
 > **Tier 3 — lowest priority in this repository.**
-> **Module:** `factory-pattern-class-samples` · **Packages:** `com.pisethjava.factory.*`, `com.pisethjava.factoryspring.*`
+> **Module:** `practices_with_springboot/factory-pattern-class-samples` · **Packages:** `com.chheang.mengheak.factory.*`, `com.chheang.mengheak.factoryspring.*`
 
 **The Spring container is already your factory.** That single sentence is most of what you need. This module has nine lesson packages hand-writing object creation; read three of them, actively avoid one, and spend the time you save on [Adapter](ADAPTER_PATTERN.md).
 
@@ -242,7 +246,7 @@ This is the idiomatic answer to "I need a new one each time," and it's cleaner t
 ## File map
 
 ```
-factory-pattern-class-samples/
+practices_with_springboot/factory-pattern-class-samples/
 ├── plain-java/.../factory/
 │   ├── common/                  ← Report, SalesReport, StockReport, CustomerReport
 │   ├── lesson01_problem/        ← the if-chain — skim
@@ -266,11 +270,11 @@ factory-pattern-class-samples/
 ## How to run
 
 ```bash
-cd factory-pattern-class-samples/plain-java && mvn clean package
+cd practices_with_springboot/factory-pattern-class-samples/plain-java && mvn clean package
 ```
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.pisethjava.factory.lesson05_registry.RegistryFactoryDemo"
+mvn exec:java -Dexec.mainClass="com.chheang.mengheak.factory.lesson05_registry.RegistryFactoryDemo"
 ```
 
 Other demos: `lesson01_problem.ProblemDemo`, `lesson02_simple.SimpleFactoryDemo`, `lesson03_strategy.StrategyFactoryDemo`, `lesson04_map.MapFactoryDemo`, `lesson07_factorymethod.FactoryMethodDemo`, `lesson08_abstractfactory.AbstractFactoryDemo`.
@@ -278,7 +282,7 @@ Other demos: `lesson01_problem.ProblemDemo`, `lesson02_simple.SimpleFactoryDemo`
 Spring Boot module (Java 17, Spring Boot 3.5.0 — it's a `spring-boot-starter` app, not a web app, so it runs and exits):
 
 ```bash
-cd factory-pattern-class-samples/spring-boot && mvn spring-boot:run
+cd practices_with_springboot/factory-pattern-class-samples/spring-boot && mvn spring-boot:run
 ```
 
 ---

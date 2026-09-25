@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.pisethjava</groupId>
+    <groupId>com.chheang.mengheak</groupId>
     <artifactId>chain-pattern-without-cor</artifactId>
     <version>1.0.0</version>
 
@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pisethjava.chain.before.BeforeChainDemo</mainClass>
+                            <mainClass>com.chheang.mengheak.chain.before.BeforeChainDemo</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

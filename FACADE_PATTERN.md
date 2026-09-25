@@ -1,7 +1,11 @@
 # Facade Pattern
 
+**Local practice:** [AiAssistantFacade](src/facade/AiAssistantFacade.java) exposes `ask(question)` to validate a question and call `AnswerService`. Package: `facade`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
 > **Tier 1 — read fourth. Last of the Tier 1 set.**
-> **Module:** `facade-pattern-class-samples` · **Packages:** `com.pisethjava.facade.*`
+> **Module:** `practices_with_springboot/facade-pattern-class-samples` · **Packages:** `com.chheang.mengheak.facade.*`
 
 This is the pattern that answers the question every Spring developer eventually asks: **"how thick should my `@Service` be, and why does my controller have eight dependencies?"**
 
@@ -232,7 +236,7 @@ A facade that starts at nine subsystems and grows to thirty methods becomes exac
 ## File map
 
 ```
-facade-pattern-class-samples/
+practices_with_springboot/facade-pattern-class-samples/
 ├── README.md                              ← the repo's best subfolder README
 ├── facade-pattern-plain-java/
 │   └── .../facade/
@@ -265,11 +269,11 @@ The WebFlux module shows the same pattern with `Mono`/`Flux` composition. Worth 
 ## How to run
 
 ```bash
-cd facade-pattern-class-samples/facade-pattern-plain-java && mvn clean package && java -jar target/facade-pattern-plain-java-1.0.0.jar
+cd practices_with_springboot/facade-pattern-class-samples/facade-pattern-plain-java && mvn clean package && java -jar target/facade-pattern-plain-java-1.0.0.jar
 ```
 
 ```bash
-cd facade-pattern-class-samples/facade-pattern-spring-boot && mvn spring-boot:run
+cd practices_with_springboot/facade-pattern-class-samples/facade-pattern-spring-boot && mvn spring-boot:run
 ```
 
 ```bash
@@ -279,10 +283,10 @@ curl -X POST http://localhost:8080/api/v1/bookings -H "Content-Type: application
 WebFlux module (different shape, `/api/v1/rooms/{roomId}/submit` with an `X-Owner-Id` header):
 
 ```bash
-cd facade-pattern-class-samples/facade-pattern-webflux && mvn spring-boot:run
+cd practices_with_springboot/facade-pattern-class-samples/facade-pattern-webflux && mvn spring-boot:run
 ```
 
-Postman collection and environment: `facade-pattern-class-samples/postman/`.
+Postman collection and environment: `practices_with_springboot/facade-pattern-class-samples/postman/`.
 
 ---
 

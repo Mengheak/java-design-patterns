@@ -7,18 +7,18 @@ Runnable classroom demos for Template Method Pattern.
 ```bash
 cd plain-java
 mvn clean package
-mvn exec:java -Dexec.mainClass="com.pisethjava.template.lesson02_template.TemplateMethodDemo"
+mvn exec:java -Dexec.mainClass="com.chheang.mengheak.template.lesson02_template.TemplateMethodDemo"
 ```
 
 Main classes:
 
-- `com.pisethjava.template.lesson01_problem.DuplicateWorkflowDemo`
-- `com.pisethjava.template.lesson02_template.TemplateMethodDemo`
-- `com.pisethjava.template.lesson03_hook.HookMethodDemo`
-- `com.pisethjava.template.lesson04_strategy_vs_template.StrategyVsTemplateDemo`
-- `com.pisethjava.template.lesson05_java_examples.JavaTemplateExamplesDemo`
-- `com.pisethjava.template.homework.PaymentTemplateHomeworkDemo`
-- `com.pisethjava.template.interview.InterviewAnswerDemo`
+- `com.chheang.mengheak.template.lesson01_problem.DuplicateWorkflowDemo`
+- `com.chheang.mengheak.template.lesson02_template.TemplateMethodDemo`
+- `com.chheang.mengheak.template.lesson03_hook.HookMethodDemo`
+- `com.chheang.mengheak.template.lesson04_strategy_vs_template.StrategyVsTemplateDemo`
+- `com.chheang.mengheak.template.lesson05_java_examples.JavaTemplateExamplesDemo`
+- `com.chheang.mengheak.template.homework.PaymentTemplateHomeworkDemo`
+- `com.chheang.mengheak.template.interview.InterviewAnswerDemo`
 
 ## Run Spring Boot
 

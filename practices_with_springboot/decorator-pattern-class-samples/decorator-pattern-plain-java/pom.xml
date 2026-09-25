@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.pisethjava</groupId>
+    <groupId>com.chheang.mengheak</groupId>
     <artifactId>decorator-pattern-plain-java</artifactId>
     <version>1.0.0</version>
 
@@ -26,7 +26,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pisethjava.decorator.demo.DecoratorCourseDemo</mainClass>
+                            <mainClass>com.chheang.mengheak.decorator.demo.DecoratorCourseDemo</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

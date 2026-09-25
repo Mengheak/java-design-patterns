@@ -1,4 +1,6 @@
 # Spring AI: From Basics to Production
+
+> **Workspace context:** This is a further-study guide. The current runnable AI assistant exercises are in [src/Main.java](src/Main.java) and use local demonstration responses. There is no Spring AI application module in this repository; the examples below require a separate project. See [README.md](README.md) for the current layout and run instructions.
  
 **A complete engineering guide to building AI-powered applications on the JVM**
  

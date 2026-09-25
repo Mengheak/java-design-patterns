@@ -1,6 +1,10 @@
 # Builder Pattern
 
-> **Tier 2** · **Module:** `builder-pattern-class-samples` · **Packages:** `com.pisethjava.builder.*`
+**Local practice:** [AiRequest](src/builder/AiRequest.java) builds immutable requests with defaults and validation in `build()`. Package: `builder`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
+> **Tier 2** · **Module:** `practices_with_springboot/builder-pattern-class-samples` · **Packages:** `com.chheang.mengheak.builder.*`
 
 **Know why it exists. Skip most of the ceremony.** In practice you will type `@Builder` from Lombok or use a `record` and never hand-write a builder. But the *one* thing Lombok does not give you — validation at `build()` — is the thing worth learning here.
 
@@ -254,7 +258,7 @@ You have been using builders all along:
 ## File map
 
 ```
-builder-pattern-class-samples/
+practices_with_springboot/builder-pattern-class-samples/
 ├── plain-java/.../builder/
 │   ├── lesson01_problem/       ← huge constructor          — skim
 │   ├── lesson02_telescoping/   ← ⭐ READ — the classic anti-pattern
@@ -279,11 +283,11 @@ builder-pattern-class-samples/
 ## How to run
 
 ```bash
-cd builder-pattern-class-samples/plain-java && mvn clean package
+cd practices_with_springboot/builder-pattern-class-samples/plain-java && mvn clean package
 ```
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.pisethjava.builder.lesson06_validation.BuilderValidationDemo"
+mvn exec:java -Dexec.mainClass="com.chheang.mengheak.builder.lesson06_validation.BuilderValidationDemo"
 ```
 
 Other demos follow the same pattern: `lesson02_telescoping.TelescopingConstructorDemo`, `lesson04_classic.ClassicBuilderDemo`, `lesson08_java_examples.JavaBuilderExamplesDemo`.
@@ -291,7 +295,7 @@ Other demos follow the same pattern: `lesson02_telescoping.TelescopingConstructo
 Spring Boot module (Java 17, Spring Boot 3.5.3 — note it differs from the Java 21 modules):
 
 ```bash
-cd builder-pattern-class-samples/spring-boot && mvn spring-boot:run
+cd practices_with_springboot/builder-pattern-class-samples/spring-boot && mvn spring-boot:run
 ```
 
 ```bash

@@ -1,7 +1,11 @@
 # Adapter Pattern
 
+**Local practice:** [VendorAiAdapter](src/adapter/VendorAiAdapter.java) implements `dependency_injection.AiModel` and delegates to `VendorAiClient.chat`. Package: `adapter`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
 > **Tier 1 — read third, after [STRATEGY_PATTERN.md](STRATEGY_PATTERN.md).**
-> **Module:** `adapter-pattern-class-samples` · **Packages:** `com.pisethjava.adapter.*`
+> **Module:** `practices_with_springboot/adapter-pattern-class-samples` · **Packages:** `com.chheang.mengheak.adapter.*`
 
 **The pattern that saves you actual money.** [Strategy](STRATEGY_PATTERN.md) picks between *your* implementations. Adapter defends you from *other people's*. That difference is why Adapter matters more in production systems.
 
@@ -289,7 +293,7 @@ But note the asymmetry in the risk: an unnecessary adapter costs you one small c
 ## File map
 
 ```
-adapter-pattern-class-samples/
+practices_with_springboot/adapter-pattern-class-samples/
 ├── adapter-pattern-plain-java/           ← 8 demos, read selectively
 │   └── .../adapter/
 │       ├── demo/AdapterCourseDemo.java   ← entry point; uncomment ONE demo at a time
@@ -324,7 +328,7 @@ adapter-pattern-class-samples/
 Spring Boot module:
 
 ```bash
-cd adapter-pattern-class-samples/adapter-pattern-spring-boot && mvn spring-boot:run
+cd practices_with_springboot/adapter-pattern-class-samples/adapter-pattern-spring-boot && mvn spring-boot:run
 ```
 
 ```bash
@@ -340,12 +344,12 @@ Change `"provider"` to `ABA` or `WING`. **The response shape never changes.** Th
 Plain Java module:
 
 ```bash
-cd adapter-pattern-class-samples/adapter-pattern-plain-java && mvn clean package && java -jar target/adapter-pattern-plain-java-1.0.0.jar
+cd practices_with_springboot/adapter-pattern-class-samples/adapter-pattern-plain-java && mvn clean package && java -jar target/adapter-pattern-plain-java-1.0.0.jar
 ```
 
 Edit `AdapterCourseDemo.java` to uncomment a different demo first — only one runs at a time.
 
-Postman collection and environment are in `adapter-pattern-class-samples/postman/`.
+Postman collection and environment are in `practices_with_springboot/adapter-pattern-class-samples/postman/`.
 
 ---
 

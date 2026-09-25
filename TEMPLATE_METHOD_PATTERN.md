@@ -1,6 +1,10 @@
 # Template Method Pattern
 
-> **Tier 2** · **Module:** `template-method-pattern-class-samples` · **Packages:** `com.pisethjava.template.*`
+**Local practice:** [AnswerWorkflow](src/template_method/AnswerWorkflow.java) fixes the sequence in `final answer()`, requires `preparePrompt()`, and offers a `formatAnswer()` hook. Package: `template_method`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
+> **Tier 2** · **Module:** `practices_with_springboot/template-method-pattern-class-samples` · **Packages:** `com.chheang.mengheak.template.*`
 
 **Low value for writing, high value for reading.** You will not create many template hierarchies. You will read Spring's every day — `JdbcTemplate`, `RestTemplate`, `TransactionTemplate`, `AbstractAuthenticationProcessingFilter`. The name "Template" in those classes is literal, not decorative.
 
@@ -296,7 +300,7 @@ Every one of those `*Template` classes is this pattern, named after it. `JdbcTem
 ## File map
 
 ```
-template-method-pattern-class-samples/
+practices_with_springboot/template-method-pattern-class-samples/
 ├── README.md
 ├── plain-java/
 │   └── .../template/
@@ -327,11 +331,11 @@ template-method-pattern-class-samples/
 The plain-java module uses `exec-maven-plugin`, so pick a demo class:
 
 ```bash
-cd template-method-pattern-class-samples/plain-java && mvn clean package
+cd practices_with_springboot/template-method-pattern-class-samples/plain-java && mvn clean package
 ```
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.pisethjava.template.lesson04_strategy_vs_template.StrategyVsTemplateDemo"
+mvn exec:java -Dexec.mainClass="com.chheang.mengheak.template.lesson04_strategy_vs_template.StrategyVsTemplateDemo"
 ```
 
 Other main classes: `lesson01_problem.DuplicateWorkflowDemo`, `lesson02_template.TemplateMethodDemo`, `lesson03_hook.HookMethodDemo`, `lesson05_java_examples.JavaTemplateExamplesDemo`.
@@ -339,14 +343,14 @@ Other main classes: `lesson01_problem.DuplicateWorkflowDemo`, `lesson02_template
 Spring Boot:
 
 ```bash
-cd template-method-pattern-class-samples/spring-boot && mvn spring-boot:run
+cd practices_with_springboot/template-method-pattern-class-samples/spring-boot && mvn spring-boot:run
 ```
 
 ```bash
 curl -X POST http://localhost:8080/api/payments -H "Content-Type: application/json" -d "{\"method\":\"ABA\",\"accountNo\":\"001\",\"amount\":50.00}"
 ```
 
-Postman files: `template-method-pattern-class-samples/postman/`.
+Postman files: `practices_with_springboot/template-method-pattern-class-samples/postman/`.
 
 ---
 

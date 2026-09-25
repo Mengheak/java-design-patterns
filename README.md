@@ -1,6 +1,8 @@
-# Design Patterns for Spring Boot Developers
+# Java Design Patterns — Self-Teaching
 
-A study guide over nine standalone Maven projects demonstrating SOLID principles and seven design patterns in plain Java and Spring Boot.
+A self-teaching workspace with plain Java AI assistant exercises in `src/` and nine sample project folders covering SOLID principles and eight design patterns in `practices_with_springboot/`.
+
+Start with [src/Main.java](src/Main.java) to see the local exercises run together. The pattern guides also explain the Maven samples under `practices_with_springboot/`. The sample sources use the `com.chheang.mengheak` package prefix; the local exercises use packages such as `adapter`, `strategy`, and `dependency_injection`.
 
 **Each pattern has its own guide in this folder.** Read them in tier order — that ordering is the most important thing on this page.
 
@@ -236,7 +238,7 @@ Unchanged → Decorator. Converted → Adapter. Replaced with something simpler 
 ## Repository layout
 
 ```
-design-pattern-main/
+self-teaching/
 ├── README.md                              ← you are here
 ├── SOLID_PRINCIPLES.md                    ← Tier 1
 ├── STRATEGY_PATTERN.md                    ← Tier 1
@@ -247,7 +249,26 @@ design-pattern-main/
 ├── BUILDER_PATTERN.md                     ← Tier 2
 ├── DECORATOR_PATTERN.md                   ← Tier 3
 ├── FACTORY_PATTERN.md                     ← Tier 3
-│
+├── SPRING_AI.md                          ← further study; no matching runnable module
+├── src/                                  ← local plain Java AI assistant exercises
+│   ├── Main.java                          ← entry point
+│   ├── dependency_injection/              AiModel, AnswerService, FakeAiModel
+│   ├── adapter/                          VendorAiAdapter, VendorAiClient
+│   ├── strategy/                         concise and teaching prompts
+│   ├── decorator/                        logging and timing wrappers
+│   ├── factory/                          AiModelFactory
+│   ├── observer/                         answer logging, counting, length
+│   ├── chain_of_responsibility/          question validation
+│   ├── builder/                          AiRequest
+│   ├── facade/                           AiAssistantFacade
+│   └── template_method/                  answer workflows
+└── practices_with_springboot/             ← independent reference projects below
+```
+
+Inside `practices_with_springboot/`:
+
+```text
+practices_with_springboot/
 ├── solid-sample-project/                  bad/good pairs for all five principles
 ├── strategy-pattern-class-samples/        plain-java + spring-boot
 ├── adapter-pattern-class-samples/         plain-java + spring-boot + postman
@@ -260,16 +281,29 @@ design-pattern-main/
 └── factory-pattern-class-samples/         plain-java + spring-boot
 ```
 
-Each project is an **independent Maven build**. There is no parent POM and no multi-module aggregator — `cd` into a module before running anything.
+The local `src/` exercises use the JDK directly. The reference modules are **independent Maven builds**. There is no root POM or multi-module aggregator — `cd` into a module before running Maven.
 
 ---
 
 ## Running the code
 
-**Plain Java modules** package to an executable jar:
+Run the local AI assistant exercises from this repository root in PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Force out | Out-Null
+$sources = Get-ChildItem src -Recurse -Filter *.java | Select-Object -ExpandProperty FullName
+javac -d out $sources
+java -cp out Main
+```
+
+The fake model and vendor client return demonstration strings; these exercises do not require an API key or a running model. In IntelliJ IDEA, run `Main` with `src/` marked as the source root.
+
+For the reference samples, start each command sequence below from the repository root. These examples use Bash syntax.
+
+**Plain Java reference modules** can package to an executable jar:
 
 ```bash
-cd adapter-pattern-class-samples/adapter-pattern-plain-java && mvn clean package && java -jar target/adapter-pattern-plain-java-1.0.0.jar
+cd practices_with_springboot/adapter-pattern-class-samples/adapter-pattern-plain-java && mvn clean package && java -jar target/adapter-pattern-plain-java-1.0.0.jar
 ```
 
 Most plain-Java modules have a single `*CourseDemo` entry point with all but one demo commented out — **uncomment the one you want before packaging.**
@@ -277,13 +311,14 @@ Most plain-Java modules have a single `*CourseDemo` entry point with all but one
 **Builder, factory, template-method and solid** use `exec-maven-plugin` instead, so name the class:
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.pisethjava.factory.lesson05_registry.RegistryFactoryDemo"
+cd practices_with_springboot/factory-pattern-class-samples/plain-java
+mvn exec:java -Dexec.mainClass="com.chheang.mengheak.factory.lesson05_registry.RegistryFactoryDemo"
 ```
 
 **Spring Boot modules:**
 
 ```bash
-cd strategy-pattern-class-samples/strategy-pattern-springboot && mvn spring-boot:run
+cd practices_with_springboot/strategy-pattern-class-samples/strategy-pattern-springboot && mvn spring-boot:run
 ```
 
 Postman collections and environments live in the `postman/` folder of the adapter, chain, facade and template-method modules.

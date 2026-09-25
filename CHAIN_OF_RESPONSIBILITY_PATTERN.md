@@ -1,7 +1,11 @@
 # Chain of Responsibility Pattern
 
+**Local practice:** [QuestionHandler](src/chain_of_responsibility/QuestionHandler.java) links blank, length, and question-mark checks. A failed check throws before the next handler runs. Package: `chain_of_responsibility`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
 > **Tier 2 — read after completing all four Tier 1 documents.**
-> **Module:** `chain-of-responsibility-pattern-class-samples` · **Packages:** `com.pisethjava.chain.*`
+> **Module:** `practices_with_springboot/chain-of-responsibility-pattern-class-samples` · **Packages:** `com.chheang.mengheak.chain.*`
 
 **Read this one for recognition, not for reimplementation.** You will rarely hand-roll a chain in Spring — because Spring already hands you three of them. The value is knowing what you are looking at when you open a `Filter` or configure Spring Security.
 
@@ -294,7 +298,7 @@ The entire Spring Security architecture is one long filter chain — roughly fif
 ## File map
 
 ```
-chain-of-responsibility-pattern-class-samples/
+practices_with_springboot/chain-of-responsibility-pattern-class-samples/
 ├── chain-pattern-without-cor/            ← ⭐ START HERE (5 files, the "before")
 │   └── .../chain/before/
 │       ├── PaymentService.java
@@ -326,22 +330,22 @@ chain-of-responsibility-pattern-class-samples/
 ## How to run
 
 ```bash
-cd chain-of-responsibility-pattern-class-samples/chain-pattern-without-cor && mvn clean package && java -jar target/chain-pattern-without-cor-1.0.0.jar
+cd practices_with_springboot/chain-of-responsibility-pattern-class-samples/chain-pattern-without-cor && mvn clean package && java -jar target/chain-pattern-without-cor-1.0.0.jar
 ```
 
 ```bash
-cd chain-of-responsibility-pattern-class-samples/chain-pattern-plain-java && mvn clean package && java -jar target/chain-pattern-plain-java-1.0.0.jar
+cd practices_with_springboot/chain-of-responsibility-pattern-class-samples/chain-pattern-plain-java && mvn clean package && java -jar target/chain-pattern-plain-java-1.0.0.jar
 ```
 
 ```bash
-cd chain-of-responsibility-pattern-class-samples/chain-pattern-spring-boot && mvn spring-boot:run
+cd practices_with_springboot/chain-of-responsibility-pattern-class-samples/chain-pattern-spring-boot && mvn spring-boot:run
 ```
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/rooms/R-101/submit -H "X-Owner-Id: OWNER-1"
 ```
 
-Check the `X-Request-Id` response header — that's `RequestIdFilter`, a real chain link, running. Postman files: `chain-of-responsibility-pattern-class-samples/postman/`.
+Check the `X-Request-Id` response header — that's `RequestIdFilter`, a real chain link, running. Postman files: `practices_with_springboot/chain-of-responsibility-pattern-class-samples/postman/`.
 
 ---
 

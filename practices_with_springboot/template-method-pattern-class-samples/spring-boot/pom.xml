@@ -12,7 +12,7 @@
         <relativePath />
     </parent>
 
-    <groupId>com.pisethjava</groupId>
+    <groupId>com.chheang.mengheak</groupId>
     <artifactId>template-method-pattern-spring-boot</artifactId>
     <version>1.0.0</version>
 

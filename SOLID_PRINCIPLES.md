@@ -1,7 +1,11 @@
 # SOLID Principles
 
+**Local practice:** [AnswerService](src/dependency_injection/AnswerService.java) receives `AiModel` and `PromptStrategy` through its constructor. This demonstrates dependency inversion with manual dependency injection. Package: `dependency_injection`.
+
+Run the local exercises through [src/Main.java](src/Main.java); see [README run instructions](README.md#running-the-code). The detailed lessons below describe the reference samples under `practices_with_springboot/`, using the `com.chheang.mengheak` package prefix. Run each sample command sequence from the repository root in Bash.
+
 > **Tier 1 — read this first.** Nothing else in this repository makes sense until DIP clicks.
-> **Module:** `solid-sample-project` · **Package:** `com.piseth.solid`
+> **Module:** `practices_with_springboot/solid-sample-project` · **Package:** `com.chheang.mengheak.solid`
 
 ---
 
@@ -20,7 +24,7 @@ Read the five principles in this order: **D → I → S → O**. (L is last and 
 Every principle has a `bad` and a `good` package side by side. **Always open `bad` first** and sit with it until the pain is obvious. If you read `good` first, the fix looks like pointless ceremony.
 
 ```
-solid-sample-project/src/main/java/com/piseth/solid/
+practices_with_springboot/solid-sample-project/src/main/java/com/chheang/mengheak/solid/
 ├── Main.java
 ├── common/          ← shared model: User, UserRepository, EmailService, ReportService
 ├── s_srp/{bad,good}
@@ -361,9 +365,9 @@ Note the overlap with ISP: `Developer.drive()` throwing `UnsupportedOperationExc
 ## How to run
 
 ```bash
-cd solid-sample-project
+cd practices_with_springboot/solid-sample-project
 mvn clean package
-mvn exec:java -Dexec.mainClass="com.piseth.solid.Main"
+mvn exec:java -Dexec.mainClass="com.chheang.mengheak.solid.Main"
 ```
 
 The interesting work is reading, not running — the demos print lines to prove the flow executed. Read `bad` then `good`, in the order D → I → S → O → L.
