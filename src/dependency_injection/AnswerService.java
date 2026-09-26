@@ -19,7 +19,7 @@ public class AnswerService {
  public void addObserver(AnswerObserver observer) {
      observers.add(observer);
  }
-    public void removeObserver(AnswerObserver observer) {
+public void removeObserver(AnswerObserver observer) {
         observers.remove(observer);
     }
 

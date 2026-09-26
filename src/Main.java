@@ -5,6 +5,9 @@ import chain_of_responsibility.BlankQuestionHandler;
 import chain_of_responsibility.QuestionHandler;
 import chain_of_responsibility.QuestionLengthHandler;
 import chain_of_responsibility.QuestionMarkHandler;
+import command.Command;
+import command.CommandQueue;
+import command.GenerateAnswerCommand;
 import decorator.LoggingAiModel;
 import decorator.TimingAiModel;
 import dependency_injection.AiModel;
@@ -168,5 +171,27 @@ public class Main {
         System.out.println();
 
         System.out.println(concise.answer(question4));
+
+
+
+
+        //command
+        System.out.println("===============Command Pattern===============");
+        Command firstCommand = new GenerateAnswerCommand(
+                answerService,
+                "What is dependency injection"
+        );
+        Command secondCommand = new GenerateAnswerCommand(
+                answerService,
+                "What is dependency injection?"
+        );
+
+        CommandQueue queue = new CommandQueue();
+        queue.submit(firstCommand);
+        queue.submit(secondCommand);
+
+        System.out.println("Commands queued. No answers generated yet.");
+
+        queue.runAll();
     }
 }
