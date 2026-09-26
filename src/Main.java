@@ -29,12 +29,27 @@ import template_method.TeachingAnswerWorkflow;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        AiModel model = demonstrateAdapter();
+        demonstrateStrategy(model);
+        AnswerService decoratedService = demonstrateDecorator();
+        AiModelFactory factory = demonstrateFactory();
+        AnswerService observedService = demonstrateObserver(factory);
+        QuestionHandler validation = demonstrateChainOfResponsibility(observedService);
+        demonstrateBuilder();
+        demonstrateFacade(model, validation);
+        demonstrateTemplateMethod(factory);
+        demonstrateCommand(decoratedService);
+    }
+
+    private static AiModel demonstrateAdapter() {
         //        the main idea is, you can use any ai model to perform the answer service
         //        AiModel model = new FakeAiModel();
         VendorAiClient client = new VendorAiClient();
         AiModel model = new VendorAiAdapter(client);
+        return model;
+    }
 
-
+    private static void demonstrateStrategy(AiModel model) {
         //        Strategy lets you switch between different ways of performing the same task. In an AI app,
         //        you might use different strategies to prepare a prompt: one asks for a short answer,
         //        another asks for a beginner-friendly explanation.
@@ -51,8 +66,9 @@ public class Main {
 
         System.out.println(conciseService.answer(question));
         System.out.println(teachingService.answer(question));
+    }
 
-
+    private static AnswerService demonstrateDecorator() {
         //decorator
         System.out.println("===============Decorator Pattern===============");
         AiModel originalModel = new FakeAiModel();
@@ -67,8 +83,10 @@ public class Main {
         System.out.println(
                 answerService2.answer("What is the Decorator pattern? (logged model)")
         );
+        return answerService;
+    }
 
-
+    private static AiModelFactory demonstrateFactory() {
         //factory
         System.out.println("===============Factory Pattern===============");
         AiModelFactory  factory = new AiModelFactory();
@@ -79,7 +97,10 @@ public class Main {
         System.out.println(
                 answerService1.answer("What is a factory?")
         );
+        return factory;
+    }
 
+    private static AnswerService demonstrateObserver(AiModelFactory factory) {
         //Observer
         System.out.println("===============Observer Pattern===============");
         AnswerService answerService3 = new AnswerService(factory.create("fake"), new TeachingPromptStrategy());
@@ -96,8 +117,10 @@ public class Main {
         System.out.println(answer);
         answerService3.removeObserver(logger);
         answerService3.answer("What is Strategy?");
+        return answerService3;
+    }
 
-
+    private static QuestionHandler demonstrateChainOfResponsibility(AnswerService answerService3) {
         //chain of responsibility
         System.out.println("===============Chain of Responsibility Pattern===============");
         QuestionHandler validation = new BlankQuestionHandler();
@@ -113,8 +136,10 @@ public class Main {
         } catch (IllegalArgumentException exception) {
             System.out.println("Rejected: " + exception.getMessage());
         }
+        return validation;
+    }
 
-
+    private static void demonstrateBuilder() {
         //builder
         System.out.println("===============Builder Pattern===============");
         AiRequest customRequest = AiRequest.builder("What is the builder pattern?")
@@ -134,16 +159,11 @@ public class Main {
         System.out.println("Default question= " + defaultRequest.getQuestion());
         System.out.println("Default temp= " +defaultRequest.getTemperature());
         System.out.println("Default max token= " +defaultRequest.getMaxTokens());
+    }
 
-
+    private static void demonstrateFacade(AiModel model, QuestionHandler validation) {
         //facade
         System.out.println("===============Facade Pattern===============");
-        QuestionHandler validation2 = new BlankQuestionHandler();
-        validation2.setNext(new QuestionLengthHandler(200));
-
-        AiModelFactory factory1 = new AiModelFactory();
-        AiModel model1 = factory1.create("fake");
-
         AnswerService answerService4 = new AnswerService(
                 model,
                 new TeachingPromptStrategy()
@@ -159,10 +179,12 @@ public class Main {
         } catch (IllegalArgumentException exception) {
             System.out.println("Rejected: " + exception.getMessage());
         }
+    }
 
+    private static void demonstrateTemplateMethod(AiModelFactory factory) {
         //template method
         System.out.println("===============Template method Pattern===============");
-        AiModel model2 = factory1.create("fake");
+        AiModel model2 = factory.create("fake");
         AnswerWorkflow teaching = new TeachingAnswerWorkflow(model2);
         AnswerWorkflow concise =  new ConciseAnswerWorkflow(model2);
 
@@ -171,10 +193,9 @@ public class Main {
         System.out.println();
 
         System.out.println(concise.answer(question4));
+    }
 
-
-
-
+    private static void demonstrateCommand(AnswerService answerService) {
         //command
         System.out.println("===============Command Pattern===============");
         Command firstCommand = new GenerateAnswerCommand(
