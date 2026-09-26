@@ -20,6 +20,7 @@ import observer.AnswerCountingObserver;
 import observer.AnswerLengthObserver;
 import observer.AnswerLoggingObserver;
 import observer.AnswerObserver;
+import state.ChatSession;
 import strategy.ConcisePromptStrategy;
 import strategy.TeachingPromptStrategy;
 import template_method.AnswerWorkflow;
@@ -40,6 +41,7 @@ public class Main {
         demonstrateFacade(model, validation);
         demonstrateTemplateMethod(factory);
         demonstrateCommand(decoratedService);
+        demonstrateState(decoratedService);
     }
 
     private static AiModel demonstrateAdapter() {
@@ -216,5 +218,22 @@ public class Main {
         System.out.println("Commands queued. No answers generated yet.");
 
         queue.runAll();
+    }
+
+    private static void demonstrateState(AnswerService answerService) {
+        System.out.println("===============State Pattern===============");
+        ChatSession session = new ChatSession(answerService);
+        System.out.println(
+                session.ask("What is the State pattern?")
+        );
+
+        session.close();
+        session.close();
+
+        try {
+            session.ask("Can you answer another question?");
+        } catch (IllegalStateException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
