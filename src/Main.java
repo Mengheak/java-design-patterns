@@ -222,18 +222,28 @@ public class Main {
 
     private static void demonstrateState(AnswerService answerService) {
         System.out.println("===============State Pattern===============");
+
         ChatSession session = new ChatSession(answerService);
-        System.out.println(
-                session.ask("What is the State pattern?")
-        );
 
+        // Active: answering succeeds.
+        System.out.println(session.ask("What is the State pattern?"));
+
+        // Active → Closed.
         session.close();
         session.close();
 
+        // Closed: answering throws an exception.
         try {
             session.ask("Can you answer another question?");
         } catch (IllegalStateException exception) {
             System.out.println(exception.getMessage());
         }
+
+        // Closed → Active.
+        session.reopen();
+
+        // Active: answering succeeds again.
+        System.out.println(session.ask("Can you answer again?"));
+
     }
 }

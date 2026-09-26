@@ -19,11 +19,15 @@ public class ChatSession {
         state.close(this);
     }
 
+    public void reopen() {
+        state.reopen(this);
+    }
+
     public String generateAnswer(String question) {
         return answerService.answer(question);
     }
 
-    public void changeState(ClosedChatState closedChatState) {
-        this.state = closedChatState;
+    public void changeState(ChatState state) {
+        this.state = state;
     }
 }

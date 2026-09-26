@@ -12,4 +12,9 @@ public class ActiveChatState implements ChatState {
         session.changeState(new ClosedChatState());
         System.out.println("Session closed.");
     }
+
+    @Override
+    public void reopen(ChatSession session) {
+        System.out.println("Session is already active.");
+    }
 }
