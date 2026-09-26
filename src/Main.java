@@ -8,6 +8,7 @@ import chain_of_responsibility.QuestionMarkHandler;
 import command.Command;
 import command.CommandQueue;
 import command.GenerateAnswerCommand;
+import command.PrintMessageCommand;
 import decorator.LoggingAiModel;
 import decorator.TimingAiModel;
 import dependency_injection.AiModel;
@@ -206,9 +207,10 @@ public class Main {
                 answerService,
                 "What is dependency injection?"
         );
-
+        Command printMessageCommand = new PrintMessageCommand("Starting the next question.....");
         CommandQueue queue = new CommandQueue();
         queue.submit(firstCommand);
+        queue.submit(printMessageCommand);
         queue.submit(secondCommand);
 
         System.out.println("Commands queued. No answers generated yet.");
